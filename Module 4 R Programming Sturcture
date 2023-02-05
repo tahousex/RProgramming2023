@@ -1,0 +1,46 @@
+##Module 4 Programming Structure in R
+##First things first, lets call in some libraries that would be of great use to us
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+
+#Now, lets define all of the data provided in the instructions
+frequency <- c(0.6,0.3,0.4,0.4,0.2,0.6,0.3,0.4,0.9,0.2)
+BP <- c(103,87,32,42,59,109,78,205,135,176)
+first <- c(1,1,1,1,0,0,0,0,NA,1)
+second <- c(0,0,1,1,0,0,1,1,1,1)
+finaldecision <- c(0,1,0,1,0,1,0,1,1,1)
+
+mydata <- data.frame(frequency,BP,first,second,finaldecision)
+#Lets calculate the mean of the Final Decisions ratings using mean()
+##We will make this a variable called "FinalDMean"
+FinalDMean <- mean(mydata$finaldecision)
+##Now lets clean the data by replacing the NA value in 'first' with a zero
+mydata$first[is.na(mydata$first)] <- 0
+View(mydata)
+
+#Now that the data is all nice and tidy, lets enable ggplot for the boxplots and histograms, I am using this package in another class
+##Might as well keep using it since you can customize all the geometries, themes and aesthetics 
+##of the histogram and boxplot using different elements from the package
+
+ggplot(mydata, aes(x = factor(finaldecision), y = BP)) +
+  geom_boxplot(
+    color = "red", 
+    fill = "black") +
+  labs(x = "Final Decision", y = "Blood Pressure")
+
+##We can see from the above box plot that as per each Final Decision value, there are different
+##Box plot groups with different metrics to visually describe the data
+##Now lets plot a histogram with the same aesthetics and values
+
+ggplot(mydata, aes(x = BP)) +
+  geom_histogram(binwidth = 30,
+    color = "red",
+    fill = "black") +
+    labs(x = "Blood Pressure", y = "Number of Patients")
+##We can see from the above histogram that as per each Blood Pressure value
+##There is a corresponding number of patients value in the y axis
+## I altered the binwidth to make sure the bucket width was suitable for this data.
+
+
+    
