@@ -1,0 +1,39 @@
+##Module 7: S3 vs S4
+## I submitted "late" but your time of submission was marked 8pm not 8am and was maintained at that time for the duration of the week
+##If that was not the case we can e-mail and figure this out privately but I took the 8pm as literal and not a mistake, apologies Dr Friedman
+library(dplyr)
+library(tidyr)
+
+
+data("airquality")
+
+list(airquality,6)
+head(airquality,6)
+
+#Generic Functions may be assigned to variables within this dataset
+## Lets See
+
+airclass <- "air_class"
+
+airquality <- list(data = airquality)
+
+AC <- class(airquality) 
+
+##S3 Function (generic)
+GFAC <- function(x){
+  (airquality$data)
+}
+
+GFAC(airquality)
+
+##Let's try an S4
+
+setClass("air_class", slots = list(""))
+ac <- data.frame(airquality)
+airthing <- new("air_class", data = ac)
+
+GDAC <- function(x){
+  
+  summarise(airquality$data)
+
+  }
