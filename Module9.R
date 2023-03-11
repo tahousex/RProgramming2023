@@ -1,4 +1,5 @@
-#Module 9: 3 Visualizations 
+##Module 9: Multivariate Analysis: Tobacco Statistics from the CDC
+
 #Libraries
 library(ggplot2)
 library(dplyr)
@@ -6,37 +7,30 @@ library(tidyverse)
 library(plyr)
 library(stats)
 
-#import data .csv file
+#Read CSV file
+smokedata <- read.csv("C:\\Users\\tyler\\Desktop\\Spring 2023\\Visual Analytics\\SmokeBan.csv")
 
-arrests <- read.csv("C:\\Users\\tyler\\Desktop\\Spring 2023\\Visual Analytics\\Arrests.csv")
+#Omit numbering column
+smokedata <- smokedata[,-1]
+head(smokedata)
 
-str(arrests)
-head(arrests)
-  
+#Clean Column Names
+colnames(smokedata) <- c("Smoker","Ban","Age","Education","African American","Hispanic","Gender")
 
+#factor statement to differentiate every education level
+smokedata$Education <- factor(smokedata$Education, labels = c("hs dropout","hs","somecollege","college","master"))
 
-#Visual 1 Boxplot
-arrests$sex <- factor(arrests$sex, labels = c("Female","Male"))
-arrests$year <- factor(arrests$year, labels = c("1997","1998","1999","2000","2001","2002"))
-ggplot(arrests, aes(sex,age, color = colour)) +
-  geom_boxplot()
+#Multivariate Visual
+ggplot(smokedata, aes(Education, Age, color = Smoker)) +
+  geom_boxplot() +
+  labs(
+    x = "Level Of Education",
+    y = "Age"
+  ) + ggtitle("Age versus Education in Smokers versus Non-Smokers")
 
-#Visual 2 Histogram
-
-ggplot(arrests, aes(checks)) +
-  geom_histogram(
-    binwidth = 0.5
-  ) + labs(
-    x = "Checks",
-    y = "Number of Inmates with that number of Checks"
-  )
-
-#Visual 3 Scatterplot
-
-ggplot(arrests, aes(year, age, color = sex)) +
-  geom_point()
-
-#Note I added this visual in to the assignment because finding data to use for making different visualizations
-#Can be difficult. For one, there is no gurantee on having an abundance of sources that have more data that is variate rather than discrete
-##Additionally, this scatter visual really did put into perspectives the rates of men and women being arrested for hte same series of crimes in  the same span of 5 years.
-
+#As we can see from the visual provided in the assignment, there are clear signs that smokers are more of a polarized character in academia.
+## While results do place them at lower success rates in lower levels of education, they are neck and neck at the highest level.
+# This group of people are more prone to being disciplined with smoking, or not, and choose to drink, smoke, party etc. causin your priorities to be neglected.
+#The 5 elements of design are Alignment, Repetition, Contrast, Proximity, and Balance.
+#By creating a clearly and contrast labeled plot, with color differences and clear axial notation, this demonstrates useage of the 5 design principles because I did end up remedying
+#Some of the issues I encountered, by using these principles as a guiding hand.
