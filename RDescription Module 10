@@ -1,0 +1,20 @@
+##Module # 10 Building your own R package assignment
+
+install.packages("roxygen2")
+install.packages("devtools")
+
+library(roxygen2)
+library(devtools)
+
+#Package
+write.dcf(list(Package = "Tyler", 
+               Title = "This package is a test file of competency", 
+               Description = "To tackle this problem", 
+               Version = "0.0.0.9000", 
+               License = "CC0 1.0 Universal", 
+               AuthorsR = "Tyler House <tahouse@usf.edu>", 
+               Depends = "R (>= 3.1.3)",
+               LazyData = "TRUE"))
+##This is my first, very brief, but complete description file using devtools
+##are there other ways to format these or organize them, I want to have good operational detail because if it looks bad? It will be looked upon bad, vise versa.
+##Call it, practicing creating my 'signature' in how I inmplement code in IDE's across multiple languages not just R.
